@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "name": "LegionForge Developer Kit",
+    "clientBuild": "7.3.5.26124",
+    "platform": "windows-x64",
+    "sourceMode": "local"
+  },
+  "directories": {
+    "tools": "tools",
+    "downloads": "cache/downloads",
+    "serverSource": "server/source",
+    "serverBuild": "server/build",
+    "serverRuntime": "server/runtime",
+    "database": "runtime/database",
+    "logs": "runtime/logs",
+    "backups": "runtime/backups",
+    "patches": "patches",
+    "custom": "custom"
+  },
+  "toolchain": {
+    "nodeMajor": 22,
+    "mariadbVersion": "11.4.10",
+    "dependencies": {
+      "boost": {
+        "version": "1.86.0",
+        "variant": "msvc-14.3-64",
+        "installer": "boost_1_86_0-msvc-14.3-64.exe",
+        "url": "https://downloads.sourceforge.net/project/boost/boost-binaries/1.86.0/boost_1_86_0-msvc-14.3-64.exe",
+        "reason": "Official prebuilt binaries (no compilation). Boost 1.86.0 is the last release that still ships boost/asio/io_service.hpp (removed in 1.87), which LegionCore-7.3.5V2 requires."
+      },
+      "innoextract": {
+        "version": "1.9",
+        "url": "https://constexpr.org/innoextract/files/innoextract-1.9-windows.zip",
+        "reason": "Portable fallback extractor for the Boost installer (no administrator rights needed)."
+      },
+      "openssl": {
+        "version": "3.5.8",
+        "url": "https://download.firedaemon.com/FireDaemon-OpenSSL/openssl-3.5.8.zip",
+        "archDir": "x64",
+        "reason": "FireDaemon portable OpenSSL 3.5 LTS build: headers, import libs and DLLs in one ZIP, no installer."
+      },
+      "mysql": {
+        "source": "portable-server",
+        "reason": "The portable MariaDB Server archive already ships include/mysql, lib/libmariadb.lib and lib/libmariadb.dll, so no separate Connector/C download is needed."
+      }
+    }
+  },
+  "customMods": [],
+  "bundledModules": {
+    "source": "custom/src",
+    "overlayTarget": "src/server/scripts/Custom",
+    "loader": "LegionForge_Loader.cpp",
+    "externalAzerothCoreSourcesDisabled": true
+  },
+  "build": {
+    "generator": "Visual Studio 17 2022",
+    "architecture": "x64",
+    "configuration": "Release"
+  }
+}

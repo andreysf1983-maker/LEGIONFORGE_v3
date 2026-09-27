@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { background: #f3f5f8; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+
+/* Component classes live in the "components" layer so Tailwind utilities
+   such as w-40 or pl-8 can still override their width and padding. */
+@layer components {
+  .field-label { display: block; margin-bottom: 7px; font-size: 11px; font-weight: 600; color: #596579; }
+  .field { width: 100%; border: 1px solid #dfe4eb; border-radius: 8px; background: #fff; padding: 10px 12px; font-size: 12px; color: #172033; outline: none; transition: .2s; }
+  .field:focus { border-color: #4c8bf5; box-shadow: 0 0 0 3px rgba(59,130,246,.09); }
+  .field:disabled { background: #f8fafc; color: #94a3b8; cursor: not-allowed; }
+  .action-card { display: flex; width: 100%; align-items: center; gap: 14px; border: 1px solid #e2e8f0; border-radius: 12px; background: white; padding: 17px; text-align: left; box-shadow: 0 1px 2px rgba(15,23,42,.03); transition: .2s; }
+  .action-card:hover { border-color: #bfdbfe; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(30,64,175,.07); }
+  .action-card b { display: block; font-size: 12px; color: #172033; }
+  .action-card span { display: block; margin-top: 4px; font-size: 10px; color: #94a3b8; }
+}
+
+.icon-blue { background:#eff6ff; color:#2563eb }.icon-violet { background:#f5f3ff; color:#7c3aed }
+.icon-amber { background:#fffbeb; color:#d97706 }.icon-green { background:#ecfdf5; color:#059669 }
+.icon-red { background:#fef2f2; color:#dc2626 }.icon-cyan { background:#ecfeff; color:#0891b2 }
+.icon-orange { background:#fff7ed; color:#ea580c }.icon-pink { background:#fdf2f8; color:#db2777 }
+
+@keyframes toast-in { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
+.fixed.bottom-6.right-6 { animation: toast-in .2s ease-out; }
+
+@media(max-width: 1050px) {
+  aside { width: 210px !important; }
+  main { margin-left: 210px !important; }
+  .grid-cols-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .grid-cols-3 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(max-width: 760px) {
+  aside { position: static !important; width: 100% !important; height: auto !important; }
+  aside nav { display:grid; grid-template-columns:repeat(3,1fr); }
+  aside > div:last-child { display:none; }
+  main { margin-left:0 !important; }
+  header { position:static !important; padding:0 18px !important; }
+  main > div { padding:18px !important; }
+  .grid-cols-4,.grid-cols-3,.grid-cols-2 { grid-template-columns:1fr; }
+  [class*="grid-cols-["] { grid-template-columns:1fr !important; }
+}
